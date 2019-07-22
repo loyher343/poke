@@ -1,7 +1,16 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
+
+    <div v-for="pokes in pokemonData">
+      {{pokes.name}}
+    </div>
+
+
+
+
+
+    <!-- <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
@@ -26,24 +35,48 @@
       <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
+  data() {
+    return {
+      pokies: []
+    }
+  },
   props: {
     msg: String
-  },created() {
-    var vm = this
-    this.$http
-      .get('https://pokeapi.co/api/v2/pokemon/ditto/')
+    
+  },
+  mounted() {
+    this.getPokeData()
+  },
+  methods: {
+    getPokeData(){
+      var vm = this
+      this.$http
+      .get('https://pokeapi.co/api/v2/generation/1')
       .then(function(response){
-        vm.data = response.data
-        console.log(vm.data)
-      })
+        vm.pokies = response.data.pokemon_species
+        console.log('GET data', vm.pokies)
+        
+      });
+    }
+  },
+  computed: {
+    
+    pokemonData() {
+      var pokemon = this.pokies
+      console.log('POGGERS',pokemon)
+      return pokemon
+    }
   }
+
+
+
 }
 </script>
 
