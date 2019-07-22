@@ -35,6 +35,14 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },created() {
+    var vm = this
+    this.$http
+      .get('https://pokeapi.co/api/v2/pokemon/ditto/')
+      .then(function(response){
+        vm.data = response.data
+        console.log(vm.data)
+      })
   }
 }
 </script>
