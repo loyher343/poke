@@ -3,7 +3,8 @@
     <h1>{{ msg }}</h1>
 
     <div v-for="pokes in pokemonData">
-      {{pokes.name}}
+      <router-link to="/foo">{{pokes.name}}</router-link>
+      <!-- <a href="#">{{pokes.name}}</a> -->
     </div>
 
 
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+import Pokemon from './Pokemon'
 export default {
   name: 'HelloWorld',
   data() {
@@ -53,6 +55,7 @@ export default {
   },
   mounted() {
     this.getPokeData()
+
   },
   methods: {
     getPokeData(){
